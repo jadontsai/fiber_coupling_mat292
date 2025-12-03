@@ -80,34 +80,3 @@ def nelder_mead(f,x0, step=1, max_iter=50000, tol=1e-2, alpha=1.0, gamma=1.5, rh
             f_vals[i] = f(simplex[i])
 
     return simplex[0], f_vals[0]
-
-def f4_noisy(x, noise_std=0.01):
-    true_value = np.sum((x - np.array([1, 2, 3, 4]))**2)
-    noise = np.random.normal(0, noise_std)
-    return true_value + noise
-
-def rosenbrock(x):
-    x = np.asarray(x)
-    return np.sum(100.0 * (x[1:] - x[:-1]**2)**2 + (1 - x[:-1])**2)
-def rosenbrock_noisy(x, noise_std=0.1):
-    """Rosenbrock with Gaussian noise."""
-    true_val = rosenbrock(x)
-    noise = np.random.normal(0, noise_std)
-    return true_val + noise
-if __name__ == '__main__':
-    #x0 = np.zeros(4)#initial guess
-    x0 = np.array([0.5,0.5,0.5,0.5])
-
-    best_pt, best_val = nelder_mead(
-        lambda x: rosenbrock_noisy(x, noise_std=0.01),
-        x0=np.array([1.05,0.98,0.95,1]),
-        step=0.001,
-        max_iter=200,
-        tol=1e-5,
-        alpha=1.0,
-        gamma=2.0,
-        rho=0.5,
-        sigma=0.5
-    )
-    print("Best point:", best_pt)
-    print("Best value:", best_val)
