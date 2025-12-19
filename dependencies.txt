@@ -1,7 +1,0 @@
-To run code (on simulated power function):
-Numpy VERSION number
-Python VERSION number
-
-To run actual fiber coupling system:
-Hardware dependencies:
-- some list
