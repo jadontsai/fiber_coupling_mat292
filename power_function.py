@@ -31,13 +31,13 @@ def power_function(x_1, y_1, x_2, y_2, x_i, y_i, w, A, c, k):
 
     exponential = -pow(a/w, 2) - pow(b/w, 2) + w_sq/8*pow(2*a/w_sq - 1j*k*theta_x, 2) + w_sq/8*pow(2*b/w_sq - 1j*k*theta_y, 2)    
     val = pow(abs(A*math.pi*w_sq/2*math.exp(exponential)), 2) #debugging
-    print(f"value={val}")#debugging
+    #print(f"value={val}")#debugging
     return val
 
 power_history = [] #for plotting
 
 def objective(x):
-    print("x has dimension ", x.shape) #for debugging
+    #print("x has dimension ", x.shape) #for debugging
     x1, y1, x2, y2 = x
     pi_2 = math.pi /2
     power = power_function(
@@ -49,14 +49,16 @@ def objective(x):
         c=0.1,
         k=1
     )
-    power_history.append(power)
-    return -power  
+    noisy_power = power + np.random.normal(0.0, 0.01) #add gaussian noise
+
+    power_history.append(noisy_power)
+    return -noisy_power  
 
 if __name__ == '__main__':
 
-    pi_2 = math.pi /2
-    pi_4 = math.pi/4
-    x0 = np.array([pi_4,pi_4, pi_2, pi_2])
+    pi_2 = 0.4+math.pi /2
+    pi_4 = 0.2+math.pi/4
+    x0 = np.array([0.67, 0.67, 2.1, 2.67])
     best_pt, best_val = nelder_mead(
         objective,
         x0=x0,
@@ -75,6 +77,6 @@ if __name__ == '__main__':
     plt.plot(power_history)
     plt.xlabel("Iteration number")
     plt.ylabel("Power")
-    plt.title(f"Power vs iterations for {x0}")
+    plt.title(f"Nedler mead starting at {x0}")
     plt.grid(True)
     plt.show()
