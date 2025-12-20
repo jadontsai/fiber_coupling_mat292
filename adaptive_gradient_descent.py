@@ -3,7 +3,7 @@ def adaptive_coordinate_descent(f, grad, x0, step0=0.1,increase_factor=1.05,decr
     """
     Adaptive Coordinate Descent for finding rough area of maximum power (nedler mead used after)
     Parameters:
-    f: objective function (testing on rosenbruck function)
+    f: objective function
     grad: Gradient of objective
     x0: init guess (np array)
     step0: initial step size
@@ -42,6 +42,7 @@ def adaptive_coordinate_descent(f, grad, x0, step0=0.1,increase_factor=1.05,decr
         history.append(f(x))
     
     return x, history
+
 
 
 
