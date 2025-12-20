@@ -2,6 +2,7 @@
 - Python 3.6+
 - NumPy
 - SciPy
+- matplotlib
 
 Install dependencies with:
 pip install -r requirements.txt
